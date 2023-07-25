@@ -1,0 +1,16 @@
+<!--index.wxml-->
+<xr-canvas disable-scroll id="main-frame" width="{{renderWidth}}" height="{{renderHeight}}" style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;" bind:process="myProcess" bind:loaded="myLoaded" bind:clickChange="clickChange" class="xr"></xr-canvas>
+<view wx:if="{{loaded}}" class="progress-box">
+    <view class="loadText">
+        ar红包...</view>
+
+    <progress percent="{{percent}}" color="#10AEFF" active stroke-width="3" />
+</view>
+<view  wx:if="{{clickFlag}}" class="red">
+    <image src="/images/red.png" mode="" />
+    <text class="red_text">
+        <text class="text_1">{{index}}</text>
+        <text class="text_2">恭喜获得{{index}}号红包！</text>
+
+    </text>
+</view>

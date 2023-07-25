@@ -1,0 +1,10 @@
+{
+    "usingComponents": {
+        "xr-canvas":"/components/xr-canvas2/index",
+        "navigate-back":"/components/navigateBack/navigateBack"
+
+    },
+    "navigationStyle": "custom",
+    "disableScroll": true
+  }
+  

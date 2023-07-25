@@ -1,0 +1,7 @@
+{
+    "usingComponents": {
+      "xr-canvas":"/components/xr-canvas3/index",
+      "navigate-back":"/components/navigateBack/navigateBack"
+
+    }
+  }

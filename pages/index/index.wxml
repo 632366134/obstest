@@ -1,0 +1,10 @@
+<view class="container">
+    <image class="banner" src="/images/banner.jpg" mode="aspectFill"></image>
+    <view class="main">
+        <view class="box-left" bind:tap="one">AR艺术游馆</view>
+        <view class="box-right">
+            <view class="box-top" bind:tap="two">数藏碎片</view>
+            <view class="box-bottom" bind:tap="three">AR红包</view>
+        </view>
+    </view>
+</view>

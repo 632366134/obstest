@@ -1,0 +1,14 @@
+<xr-scene ar-system="threeDof" bind:resume="handleresume" bind:pause="handlepause" bind:ready="handleReady" bind:ar-ready="handleARReady">
+    <xr-assets bind:loaded="handleAssetsLoaded" bind:progress="handleAssetsProgress">
+        <xr-asset-load type="gltf" asset-id="gltfitem" src="/images/hb.glb" />
+    </xr-assets>
+    <xr-node wx:if="{{arReady}}" id="xrGltf" >
+        <xr-gltf wx:for="{{list}}" cube-shape="size: 1 2 0.5; center: 0 0 0" bind:touch-shape="logFunction" rotation="0 {{item.r}} 0" position="{{item.x}} 0 {{item.z}}" wx:for-item="item" id="{{item.i}}" scale="0.3 0.3 0.3" model="gltfitem"></xr-gltf>
+    </xr-node>
+
+    <xr-light type="ambient" color="1 1 1" intensity="0.1" />
+    <xr-light type="directional" position="0 3 0" rotation="0 0 0" color="1 1 1" intensity="2.5" cast-shadow />
+    <xr-light type="directional" rotation="40 70 0" color="1 1 1" intensity="2" cast-shadow />
+    <xr-light type="directional" rotation="40 250 0" color="1 1 1" intensity="2" cast-shadow />
+    <xr-camera far="5" id="camera" clear-color="0.4 0.8 0.6 1" background="ar" is-ar-camera />
+</xr-scene>

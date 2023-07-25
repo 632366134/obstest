@@ -1,0 +1,39 @@
+<xr-scene id="xr-scene" ar-system="modes:Marker" bind:ready="handleReady" bind:ar-ready="handleARReady">
+    <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+        <xr-asset-material asset-id="video-bg-mat" effect="simple" uniforms="u_baseColorFactor: 0.0 0.0 0.0 1" />
+        <xr-asset-material asset-id="loading-mat" effect="simple" uniforms="u_baseColorFactor: 1.0 1.0 1.0 0.8" />
+    </xr-assets>
+    <xr-node wx:if="{{arReady}}">
+        <xr-ar-tracker mode="Marker" wx:for="{{obsList1}}" id="marker-{{item2.mediaCode}}" wx:for-item="item2" src="https:{{item2.mediaUrl}}" bind:ar-tracker-switch="handleTrackerSwitch">
+            <xr-node wx:for="{{mediaList1}}" wx:key="mediaCode">
+                <!-- gltf情况 -->
+                <xr-node cast-shadow receive-shadow  wx:if="{{ item.parentCode ===item2.mediaCode &&item.mediaType === 5 && gltfLoaded}}" rotation="-90 0 0">
+                    <xr-gltf  visible="false"  id="mesh-gltf-{{item.id}}"   anim-autoplay node-id="mesh-gltf-{{item.id}}" model="gltf-{{item.id}}"></xr-gltf>
+                </xr-node>
+                <!-- image情况 -->
+                <xr-node wx:if="{{ item.parentCode ===item2.mediaCode &&item.mediaType === 3 && imageLoaded}}" position="0 0.2 0" rotation="0 0 0">
+                    <xr-mesh  node-id="mesh-mat-{{item.id}}"  geometry="plane" material="image-mat-{{item.id}}"   states="cullOn: true ,alphaMode:BLEND,alphaCutOff:false" />
+                </xr-node>
+                <!-- 视频情况 -->
+
+                <xr-node wx:if="{{item.parentCode ===item2.mediaCode &&item.mediaType === 4}}">
+                    <xr-node wx:if="{{videoLoaded}}" position="{{vp[0]}} {{vp[1]}} {{vp[2]}}" rotation="{{vr[0]}} {{vr[1]}} {{vr[2]}}" scale="{{vs[0]}} {{vs[1]}} {{vs[2]}}">
+                        <!-- <xr-mesh wx:if="{{videoRatioLoaded}}" scale="{{markerWidth}} 1 1" geometry="plane" material="video-bg-mat" states="cullOn: false" /> -->
+                        <xr-mesh position="0 0.01 0" scale="{{markerWidth}} 1 1" geometry="plane" material="video-mat-{{item.id}}" />
+                    </xr-node>
+                    <xr-node wx:else>
+                        <xr-mesh wx:if="{{videoRatioLoaded}}" scale="{{markerWidth}} 1 1" geometry="plane" material="loading-mat" states="cullOn: false, alphaMode: BLEND,renderQueue: 2501" />
+                    </xr-node>
+                </xr-node>
+            </xr-node>
+        </xr-ar-tracker>
+        <xr-camera id="camera" node-id="camera" position="0 0 4" clear-color="0.925 0.925 0.925 1" background="ar" near="0.1" far="2000" is-ar-camera></xr-camera>
+    </xr-node>
+    <xr-node node-id="lights">
+
+      <xr-light type="ambient" color="1 1 1" intensity="0.1" />
+  <xr-light type="directional" position="0 3 0" rotation="0 0 0" color="1 1 1" intensity="2.5" cast-shadow />
+  <xr-light type="directional" rotation="40 70 0" color="1 1 1" intensity="2" cast-shadow />
+  <xr-light type="directional" rotation="40 250 0" color="1 1 1" intensity="2" cast-shadow />
+    </xr-node>
+</xr-scene>

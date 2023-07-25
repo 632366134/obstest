@@ -1,0 +1,55 @@
+.banner {
+    width: 750rpx;
+    height: 532rpx;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    background-color: #FDFDFD;
+}
+
+.main {
+    text-align: center;
+    font-size: 40rpx;
+    font-family: YouSheBiaoTiHei;
+    color: #FFFFFF;
+    text-shadow: 0rpx 5rpx 5rpx rgba(1, 1, 111, 0.3);
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20rpx 30rpx;
+    display: flex;
+}
+
+.box-left {
+    width: 335rpx;
+    height: 540rpx;
+    background: #A1ACFD;
+    border-radius: 50rpx;
+    margin-right: 20rpx;
+    line-height: 540rpx;
+
+}
+
+.box-right {
+    line-height: 250rpx;
+    width: 335rpx;
+    height: 540rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.box-top {
+    width: 335rpx;
+    height: 260rpx;
+    border-radius: 50rpx;
+    background: #C9A5F8;
+}
+
+.box-bottom {
+    width: 335rpx;
+    height: 260rpx;
+    border-radius: 50rpx;
+    background: #B2DDFC;
+}
