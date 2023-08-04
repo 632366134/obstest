@@ -5,10 +5,10 @@
     </xr-assets>
     <xr-node wx:if="{{arReady}}">
         <xr-ar-tracker mode="Marker" wx:for="{{obsList1}}" id="marker-{{item2.mediaCode}}" wx:for-item="item2" src="https:{{item2.mediaUrl}}" bind:ar-tracker-switch="handleTrackerSwitch">
-            <xr-node wx:for="{{mediaList1}}" wx:key="mediaCode">
+            <xr-node wx:for="{{mediaList1}}" wx:key="mediaCode" id="gltf-{{item.id}}">
                 <!-- gltf情况 -->
-                <xr-node cast-shadow receive-shadow  wx:if="{{ item.parentCode ===item2.mediaCode &&item.mediaType === 5 && gltfLoaded}}" rotation="-90 0 0">
-                    <xr-gltf  visible="false"  id="mesh-gltf-{{item.id}}"   anim-autoplay node-id="mesh-gltf-{{item.id}}" model="gltf-{{item.id}}"></xr-gltf>
+                <xr-node id="{{item.id}}"    wx:if="{{ item.parentCode ===item2.mediaCode &&item.mediaType === 5 && gltfLoaded}}" >
+                    <xr-gltf rotation="-90 0 0" anim-autoplay visible="false"  id="mesh-gltf-{{item.id}}"   node-id="mesh-gltf-{{item.id}}" model="gltf-{{item.id}}"></xr-gltf>
                 </xr-node>
                 <!-- image情况 -->
                 <xr-node wx:if="{{ item.parentCode ===item2.mediaCode &&item.mediaType === 3 && imageLoaded}}" position="0 0.2 0" rotation="0 0 0">
@@ -31,9 +31,11 @@
     </xr-node>
     <xr-node node-id="lights">
 
-      <xr-light type="ambient" color="1 1 1" intensity="0.1" />
-  <xr-light type="directional" position="0 3 0" rotation="0 0 0" color="1 1 1" intensity="2.5" cast-shadow />
-  <xr-light type="directional" rotation="40 70 0" color="1 1 1" intensity="2" cast-shadow />
-  <xr-light type="directional" rotation="40 250 0" color="1 1 1" intensity="2" cast-shadow />
+        <xr-light type="ambient" color="1 1 1" intensity="0.8" />
+    <xr-light type="directional" rotation="120 -40 0" color="1 1 1" intensity="3" />
+    <!-- <xr-light type="directional" position="3 0 0" rotation="120 140 0" color="1 1 1" intensity="3" />
+    <xr-light type="directional" rotation="40 140 0" color="1 1 1" intensity="3" /> -->
+
+
     </xr-node>
 </xr-scene>

@@ -156,7 +156,6 @@ Page({
                 gltfResList,
                 videoResList,
                 imageResList,
-
                 flag: true
 
             });

@@ -7,5 +7,5 @@
     "bigPackageSizeSupport": true,
     "autoAudits": true
   },
-  "libVersion": "2.33.0"
+  "libVersion": "3.0.0"
 }

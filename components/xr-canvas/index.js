@@ -142,7 +142,7 @@ Component({
      * 组件的方法列表
      */
     methods: {
-        share(){
+        share() {
             this.scene.share.captureToFriends();
         },
         releaseImage() {
@@ -211,6 +211,8 @@ Component({
             detail
         }) {
             console.log('assets loaded', detail.value);
+      this.scene.event.addOnce('touchstart', this.placeNode.bind(this));
+
         },
         handleARReady: function () {
             // if(this.data.obsList1[0].projectCode =='369654870789541888'){
@@ -230,7 +232,7 @@ Component({
         }) {
             const xrScene = this.scene = detail.value;
             console.log('xr-scene', xrScene);
-      const xrFrameSystem=this.xrFrameSystem = wx.getXrFrameSystem()
+            const xrFrameSystem = this.xrFrameSystem = wx.getXrFrameSystem()
 
 
             // 加载场景资源
@@ -335,7 +337,7 @@ Component({
                         return
                     }
                     this.gltfItemTRS.rotation.x -= phi
-                    this.gltfItemTRS.rotation.y -= theta
+                    this.gltfItemSubTRS.rotation.z += theta
                     this.mouseInfo.startX = x
                     this.mouseInfo.startY = y
                 }
@@ -379,10 +381,10 @@ Component({
                     type: 'gltf',
                     assetId: 'gltf-' + gltfItem.id,
                     src: 'https:' + gltfItem.mediaUrl,
-                    // src:'http://arp3.arsnowslide.com/model.glb',
-                    options: {
-                        "ignoreError": '-1'
-                    }
+                    // src:'robot.glb',
+                    // options: {
+                    //     "ignoreError": '-1'
+                    // }
                 })))
                 console.log('glTF asset loaded')
                 // this.setData({
@@ -535,19 +537,23 @@ Component({
                                     const list4 = this.data.paramList1.filter(d => v.mediaCode === d.mediaCode)
                                     console.log(`mesh-gltf-${v.id}`)
                                     const gltf = this.scene.getNodeById(`mesh-gltf-${v.id}`)
-                                       // 获取改动元素
-      this.gltfItemTRS = this.scene.getElementById(`mesh-gltf-${v.id}`).getComponent(this.xrFrameSystem.Transform)
+                                    // 获取改动元素
+                                    this.gltfItemTRS = this.scene.getElementById(`gltf-${v.id}`).getComponent(this.xrFrameSystem.Transform)
+                                    this.gltfItemSubTRS = this.scene.getElementById(v.id).getComponent(this.xrFrameSystem.Transform)
 
-      // 开启旋转缩放逻辑
-      this.scene.event.addOnce('touchstart', this.handleTouchStart)
+
+                                    // 开启旋转缩放逻辑
+                                    this.scene.event.addOnce('touchstart', this.handleTouchStart)
                                     console.log(gltf, list4)
                                     console.log([list4[0].modelParamInfo[0]])
 
                                     gltf.setData({
                                         position: [list4[0].modelParamInfo[0], list4[0].modelParamInfo[1], list4[0].modelParamInfo[2]],
                                         scale: [list4[1].modelParamInfo[0], list4[1].modelParamInfo[1], list4[1].modelParamInfo[2]],
-                                        rotation: [list4[2].modelParamInfo[0], list4[2].modelParamInfo[1], list4[2].modelParamInfo[2]],
-                                        // visible:true
+                                        // scale: [0.1, 0.1, 0.1],
+
+                                        // rotation: [list4[2].modelParamInfo[0], list4[2].modelParamInfo[1], list4[2].modelParamInfo[2]],
+                                        visible: true
                                     })
                                     wx.nextTick(() => {
                                         gltf.setData({

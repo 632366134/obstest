@@ -1,0 +1,16 @@
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <canvas type="webgl" id="webgl" style="width: {{width}}px; height: {{height}}px">
+  </canvas>
+
+  <view class="btn-cnt2">
+      <button type="primary" disabled="{{!imgUrl}}" bindtap="addMarker">添加 marker</button>
+      <button type="primary" disabled="{{!imgUrl}}" bindtap="removeMarker">删除 marker</button>
+      <button type="primary" disabled="{{!imgUrl}}" bindtap="getAllMarker">获取所有 marker</button>
+  </view>
+
+  <view class="btn-cnt">
+      <button type="primary" class="btn-choose" bindtap="chooseMedia">选择图片</button>
+  </view>
+</view>
+

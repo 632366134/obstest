@@ -298,7 +298,7 @@ Component({
             this.gltfModel = await scene.assets.loadAsset({
                 type: 'gltf',
                 assetId: 'gltf',
-                src: '/images/hb.glb',
+                src: 'https://arp3.arsnowslide.com/undefined/385971493892739072/undefined/dengta.glb',
                 options: {
                     "ignoreError": '-1'
                 }
