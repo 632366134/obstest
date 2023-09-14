@@ -8,19 +8,40 @@ Page({
 
     },
     one() {
-        wx.navigateTo({
-            url: '/pages/pages1/pages1',
+        wx.requirePrivacyAuthorize({
+            success: () => {
+                wx.navigateTo({
+                    url: '/pages/pages1/pages1',
+                })
+            },
+            fail: () => {}, // 用户拒绝授权
+            complete: () => {}
         })
+
     },
     two() {
-        wx.navigateTo({
-            url: '/pages/pages2/pages2',
-        })
+        wx.requirePrivacyAuthorize({
+            success: () => {
+                wx.navigateTo({
+                    url: '/pages/pages2/pages2',
+                })
+            },
+            fail: () => {}, // 用户拒绝授权
+            complete: () => {}
+          })
+       
     },
     three() {
-        wx.navigateTo({
-            url: '/pages/pages3/pages3',
-        })
+        wx.requirePrivacyAuthorize({
+            success: () => {
+                wx.navigateTo({
+                    url: '/pages/pages3/pages3',
+                })
+            },
+            fail: () => {}, // 用户拒绝授权
+            complete: () => {}
+          })
+     
     },
     /**
      * 生命周期函数--监听页面加载
