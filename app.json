@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/pages1/pages1",
     "pages/pages2/pages2",
-    "pages/pages3/pages3"
+    "pages/pages3/pages3",
+    "components/myRedList/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

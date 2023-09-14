@@ -1,5 +1,5 @@
-// const baseUrl = "https://www.arsnowslide.com/";
-const baseUrl = "http://192.168.0.8:8081/";
+const baseUrl = "https://www.arsnowslide.com/";
+// const baseUrl = "http://192.168.0.8:8081/";
 
 function request(method, url, data) {
     return new Promise((resolve, reject) => {
@@ -59,13 +59,13 @@ function request2(method, url, data) {
                     resolve(res.data.data);
                 } else if (res.data.code === 1006) {
                     wx.showToast({
-                        title: `${res.data.message}`,
+                        title: `${res.message}`,
                         icon: 'none'
                     })
                     resolve(res.data);
                 } else {
                     wx.showToast({
-                        title: `${res.data.status}${res.data.error}`,
+                        title: `${res.message}`,
                         icon: 'error'
                     })
                     console.log(res)
@@ -74,7 +74,7 @@ function request2(method, url, data) {
             },
             fail: (err) => {
                 wx.showToast({
-                    title: `${err.data.status}${err.data.error}`,
+                    title: `${err.message}`,
                     icon: 'error'
                 })
                 reject(err);
@@ -103,9 +103,9 @@ const API = {
     addPiece: (data) =>
         request("POST", `brounche/wx/multi/function/user/piece/add?${data}`),
     getPocketList: (data) =>
-        request("POST", "brounche/wx/multi/function/user/red/pocket/list", data),
+        request("GET", `brounche/wx/multi/function/user/red/pocket/list?${data}`),
     addPocket: (data) =>
-        request("POST", "brounche/wx/multi/function/user/red/pocket/add", data),
+        request("POST", `brounche/wx/multi/function/user/red/pocket/add?${data}`),
 };
 module.exports = {
     API,

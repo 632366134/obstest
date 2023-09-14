@@ -1,0 +1,32 @@
+<page-container show="{{redListFlag1}}" position="right">
+    <view class="redList">
+        <view class="{{isIPhoneX ? 'navigateback-x' :'navigateback'}}">
+            <text style="font-size:32rpx;font-family: PingFang SC;font-weight: bold;color: #000000;">我的红包</text>
+        </view>
+        <view bindtap="back" class="{{isIPhoneX ? 'backbtn-x' :'backbtn'}}">
+            <image class="back" src="/images/backBtn.png"></image>
+        </view>
+        <view style="width:100vw;height:188rpx;background-color:#fff;"></view>
+        <scroll-view 	scroll-top="200" scroll-y="{{true}}" class="main">
+            <view class="box" wx:for="{{rewardList2}}" wx:key="index">
+                <view class="top">
+                    <view class="left">
+                        <view class="name">{{item.name}}</view>
+                        <view class="margin smallText">到期日:{{item.expiryDate}}</view>
+
+                    </view>
+                    <view class="right">
+                        <view class="price2 redText">¥{{item.discountAmount}}</view>
+                        <view class=" margin redText">满{{item.minPurchaseAmount}}可用</view>
+
+                    </view>
+
+                </view>
+                <view class="bottom">
+                    {{item.rules}}
+                </view>
+
+            </view>
+        </scroll-view>
+    </view>
+</page-container>

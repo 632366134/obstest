@@ -102,9 +102,13 @@ Component({
         detached() {
             this.innerAudioContext?.destroy()
             clearInterval(this.innerInterval);
+            // console.log(this.scene.assets)
+            // console.log(this.scene)
             this.data.mediaList1.forEach((c, v) => {
-                this.scene.assets.releaseAsset('gltf', `gltf-${v}`);
+                this.scene.assets.releaseAsset('gltf', `gltf-${v.id}`);
             })
+            // console.log(this.scene.assets)
+            // console.log(this.scene)
             this.releaseVideo();
             //   this.closeVideo()
             this.releaseImage();
@@ -114,7 +118,13 @@ Component({
             console.log('xr-startdetached')
             this.scene.removeChild(this.xrgltf);
             map1 = new Map()
-            if (this.scene) {
+           
+            if (this.xrgltf) {
+                this.xrgltf = null
+            }
+            if (this.tmpV3) {
+                this.tmpV3 = null
+            } if (this.scene) {
                 this.scene = null
             }
             if (this.anchor) {
@@ -125,12 +135,6 @@ Component({
             }
             if (this.GLTF) {
                 this.GLTF = null
-            }
-            if (this.xrgltf) {
-                this.xrgltf = null
-            }
-            if (this.tmpV3) {
-                this.tmpV3 = null
             }
             if (this.gltfModel) {
                 this.gltfModel = null
@@ -206,47 +210,42 @@ Component({
             detail
         }) {
             console.log('assets progress', detail.value);
+            this.triggerEvent('changePercent', {
+                percent: detail.value.progress * 100
+            })
         },
-        handleAssetsLoaded: function ({
+        handleAssetsLoaded({
             detail
         }) {
             console.log('assets loaded', detail.value);
-      this.scene.event.addOnce('touchstart', this.placeNode.bind(this));
+            this.setData({
+                arReady: true,
+                gltfLoaded: true
+            })
+            this.triggerEvent('changeShow', {
+                isShowScan: true
+            })
 
         },
-        handleARReady: function () {
-            // if(this.data.obsList1[0].projectCode =='369654870789541888'){
-            //     console.log(this.data.obsList1[0].projectCode)
-            //     this.innerAudioContext = wx.createInnerAudioContext({
-            //         useWebAudioImplement: true // 是否使用 WebAudio 作为底层音频驱动，默认关闭。对于短音频、播放频繁的音频建议开启此选项，开启后将获得更优的性能表现。由于开启此选项后也会带来一定的内存增长，因此对于长音频建议关闭此选项
-            //       })
-            //       this.innerAudioContext.src = 'https://arimage-search-copy.arsnowslide.cn/arkitmp3.mp3'
-
-            //       // this.innerAudioContext.play() // 播放
-            //      this.innerAudioContext.loop = true
-
-            // }
-        },
+        handleARReady: function () {},
         async handleReady({
             detail
         }) {
             const xrScene = this.scene = detail.value;
             console.log('xr-scene', xrScene);
             const xrFrameSystem = this.xrFrameSystem = wx.getXrFrameSystem()
-
-
             // 加载场景资源
             try {
-                await this.loadVideo(this.data.videoResList1)
-                await this.loadGLTF(this.data.gltfResList1)
-                await this.loadImage(this.data.imageResList1)
-                await this.triggerEvent('changeShow', {
-                    isShowScan: true
-                })
-                this.setData({
-                    arReady: true
-                })
-                this.mat = new(wx.getXrFrameSystem().Matrix4)();
+                // await this.loadVideo(this.data.videoResList1)
+                // await this.loadGLTF(this.data.gltfResList1)
+                // await this.loadImage(this.data.imageResList1)
+                // await this.triggerEvent('changeShow', {
+                //     isShowScan: true
+                // })
+                // this.setData({
+                //     arReady: true
+                // })
+                // this.mat = new(wx.getXrFrameSystem().Matrix4)();
                 const {
                     width,
                     height
@@ -362,9 +361,9 @@ Component({
 
                     const s = deltaScale * 0.02 + 1
                     // 缩小
-                    this.gltfItemTRS.scale.x *= s
-                    this.gltfItemTRS.scale.y *= s
-                    this.gltfItemTRS.scale.z *= s
+                    this.gltfItemSubTRS.scale.x *= s
+                    this.gltfItemSubTRS.scale.y *= s
+                    this.gltfItemSubTRS.scale.z *= s
                 }
 
             } catch (err) {
@@ -372,109 +371,109 @@ Component({
             }
 
         },
-        async loadGLTF(gltfList) {
-            console.log('gogltf')
-            const scene = this.scene
-            if (gltfList.length > 0) {
-                console.log(gltfList)
-                const gltfModel = await Promise.all(gltfList.map(gltfItem => scene.assets.loadAsset({
-                    type: 'gltf',
-                    assetId: 'gltf-' + gltfItem.id,
-                    src: 'https:' + gltfItem.mediaUrl,
-                    // src:'robot.glb',
-                    // options: {
-                    //     "ignoreError": '-1'
-                    // }
-                })))
-                console.log('glTF asset loaded')
-                // this.setData({
-                //   gltfLoaded: true
-                // })
-            } else {
-                console.log('gltfList', gltfList)
-                this.setData({
-                    gltfLoaded: false
-                })
-            }
-        },
+        // async loadGLTF(gltfList) {
+        //     console.log('gogltf')
+        //     const scene = this.scene
+        //     if (gltfList.length > 0) {
+        //         console.log(gltfList)
+        //         const gltfModel = await Promise.all(gltfList.map(gltfItem => scene.assets.loadAsset({
+        //             type: 'gltf',
+        //             assetId: 'gltf-' + gltfItem.id,
+        //             src: 'https:' + gltfItem.mediaUrl,
+        //             // src:'robot.glb',
+        //             // options: {
+        //             //     "ignoreError": '-1'
+        //             // }
+        //         })))
+        //         console.log('glTF asset loaded')
+        //         // this.setData({
+        //         //   gltfLoaded: true
+        //         // })
+        //     } else {
+        //         console.log('gltfList', gltfList)
+        //         this.setData({
+        //             gltfLoaded: false
+        //         })
+        //     }
+        // },
 
-        async loadImage(imageList) {
-            console.log('goimage', imageList)
-            const scene = this.scene
-            if (imageList.length > 0) {
-                const imageIdList = [];
-                const images = await Promise.all(imageList.map((imageItem) => {
-                    imageIdList.push(imageItem.id);
-                    return scene.assets.loadAsset({
-                        type: 'texture',
-                        assetId: `image-${imageItem.id}`,
-                        src: 'https:' + imageItem.mediaUrl
-                    })
-                }))
-                console.log(images[0], 'images')
-                images.map((videoTexture, index) => {
-                    const videoMat = scene.createMaterial(
-                        scene.assets.getAsset('effect', 'standard'), {
-                            u_baseColorMap: videoTexture.value
-                        }
-                    )
-                    scene.assets.addAsset('material', `image-mat-${imageList[index].id}`, videoMat)
-                })
-                console.log('image asset loaded')
-                this.setData({
-                    imageIdList: imageIdList,
-                    imageLoaded: true
-                })
-            } else {
-                this.setData({
-                    imageIdList: [],
-                    imageLoaded: false
-                })
-            }
-        },
-        async loadVideo(videoList) {
-            const scene = this.scene
+        // async loadImage(imageList) {
+        //     console.log('goimage', imageList)
+        //     const scene = this.scene
+        //     if (imageList.length > 0) {
+        //         const imageIdList = [];
+        //         const images = await Promise.all(imageList.map((imageItem) => {
+        //             imageIdList.push(imageItem.id);
+        //             return scene.assets.loadAsset({
+        //                 type: 'texture',
+        //                 assetId: `image-${imageItem.id}`,
+        //                 src: 'https:' + imageItem.mediaUrl
+        //             })
+        //         }))
+        //         console.log(images[0], 'images')
+        //         images.map((videoTexture, index) => {
+        //             const videoMat = scene.createMaterial(
+        //                 scene.assets.getAsset('effect', 'standard'), {
+        //                     u_baseColorMap: videoTexture.value
+        //                 }
+        //             )
+        //             scene.assets.addAsset('material', `image-mat-${imageList[index].id}`, videoMat)
+        //         })
+        //         console.log('image asset loaded')
+        //         this.setData({
+        //             imageIdList: imageIdList,
+        //             imageLoaded: true
+        //         })
+        //     } else {
+        //         this.setData({
+        //             imageIdList: [],
+        //             imageLoaded: false
+        //         })
+        //     }
+        // },
+        // async loadVideo(videoList) {
+        //     const scene = this.scene
 
-            if (videoList.length == 0) return
-            console.log(videoList)
-            const videos = await Promise.all(videoList.map((videoItem) => {
-                this.data.videoIdList.push(videoItem.id)
-                console.log(`video-${videoItem.id}`)
+        //     if (videoList.length == 0) return
+        //     console.log(videoList)
+        //     const videos = await Promise.all(videoList.map((videoItem) => {
+        //         this.data.videoIdList.push(videoItem.id)
+        //         console.log(`video-${videoItem.id}`)
 
-                return scene.assets.loadAsset({
-                    type: 'video-texture',
-                    assetId: `video-${videoItem.id}`,
-                    src: `https:${videoItem.mediaUrl}`,
-                    options: {
-                        autoPlay: false,
-                        loop: true,
-                        abortAudio: false
-                    },
-                })
-            }))
+        //         return scene.assets.loadAsset({
+        //             type: 'video-texture',
+        //             assetId: `video-${videoItem.id}`,
+        //             src: `https:${videoItem.mediaUrl}`,
+        //             options: {
+        //                 autoPlay: false,
+        //                 loop: true,
+        //                 abortAudio: false
+        //             },
+        //         })
+        //     }))
 
 
-            await Promise.all(videos.map((videoTexture, index) => {
-                const videoMat = scene.createMaterial(
-                    scene.assets.getAsset('effect', 'standard'), {
-                        u_baseColorMap: videoTexture.value.texture
-                    }
-                )
-                if (videoTexture) {
-                    console.log(videoTexture)
-                    let p = videoTexture.value.width / videoTexture.value.height
-                    map1.set(videoList[index].id, 1 * p)
-                    scene.assets.addAsset('material', `video-mat-${videoList[index].id}`, videoMat)
+        //     await Promise.all(videos.map((videoTexture, index) => {
+        //         const videoMat = scene.createMaterial(
+        //             scene.assets.getAsset('effect', 'standard'), {
+        //                 u_baseColorMap: videoTexture.value.texture
+        //             }
+        //         )
+        //         if (videoTexture) {
+        //             console.log(videoTexture)
+        //             let p = videoTexture.value.width / videoTexture.value.height
+        //             map1.set(videoList[index].id, 1 * p)
+        //             scene.assets.addAsset('material', `video-mat-${videoList[index].id}`, videoMat)
 
-                }
+        //         }
 
-            }))
-            this.setData({
-                videoLoaded: true
-            })
+        //     }))
+        //     this.setData({
+        //         videoLoaded: true
+        //     })
 
-            console.log('video asset loaded')
-        },
+        //     console.log('video asset loaded')
+        // },
 
 
         handleTrackerSwitch({
@@ -485,48 +484,15 @@ Component({
             const element = detail.el;
             let obsList = this.data.obsList1
             obsList.forEach(async i => {
-                // const video = this.scene.assets.getAsset('video-texture', `video-${i}`);
                 const markerInfo = i;
                 console.log(markerInfo)
                 const markerTracker = this.scene.getElementById(`marker-${markerInfo.mediaCode}`)
                 if (element === markerTracker) {
-                    // 处理视频纹理
-                    // this.releaseVideo();
-                    // 匹配 tracker
+
                     if (active) {
                         this.setData({
                             gltfLoaded: true
                         })
-                        if (this.data.videoResList1.length != 0) {
-                            console.log('videomatch')
-                            const list = this.data.videoResList1.filter(v => {
-                                if (v.parentCode === markerInfo.mediaCode) {
-                                    const list4 = this.data.paramList1.filter(d => v.mediaCode === d.mediaCode)
-                                    this.setData({
-                                        vp: list4[0].modelParamInfo,
-                                        vs: list4[1].modelParamInfo,
-                                        vr: list4[2].modelParamInfo,
-                                    })
-                                    console.log(this.data.vp, this.data.vs, this.data.vr)
-                                    return v
-                                }
-
-                            })
-                            if (list.length != 0) {
-                                let id = list[0].id
-                                const markerWidth = map1.get(id)
-                                this.setData({
-                                    markerWidth,
-                                    videoLoaded: true
-                                })
-                                let vid = 'video-' + id
-                                console.log(vid)
-                                video = this.scene.assets.getAsset('video-texture', vid);
-                                console.log(video)
-                                video.play()
-                            }
-                        }
-
                         if (this.data.gltfResList1.length != 0) {
                             console.log('gltfmatch')
 
@@ -550,55 +516,20 @@ Component({
                                     gltf.setData({
                                         position: [list4[0].modelParamInfo[0], list4[0].modelParamInfo[1], list4[0].modelParamInfo[2]],
                                         scale: [list4[1].modelParamInfo[0], list4[1].modelParamInfo[1], list4[1].modelParamInfo[2]],
-                                        // scale: [0.1, 0.1, 0.1],
-
-                                        // rotation: [list4[2].modelParamInfo[0], list4[2].modelParamInfo[1], list4[2].modelParamInfo[2]],
                                         visible: true
                                     })
-                                    wx.nextTick(() => {
-                                        gltf.setData({
-                                            visible: true
-                                        })
-                                        this.innerAudioContext?.play()
-                                    })
+
+
                                 }
                             })
+
+
                         }
-                        // if (this.data.imageResList1.length != 0) {
-                        //   const list3 = this.data.imageResList1.forEach(v => {
-                        //     if (v.parentCode === markerInfo.mediaCode) {
-                        //       const list4 = this.data.paramList1.filter(d => v.mediaCode === d.mediaCode)
-                        //       console.log(`mesh-mat-${v.id}`)
-                        //       const gltf = this.scene.getNodeById(`mesh-mat-${v.id}`)
-                        //       console.log(gltf, list4)
-                        //       console.log([list4[0].modelParamInfo[0]])
-
-                        //       gltf.setData({
-                        //         position: [list4[0].modelParamInfo[0], list4[0].modelParamInfo[1], list4[0].modelParamInfo[2]],
-                        //         scale: [list4[1].modelParamInfo[0], list4[1].modelParamInfo[1], list4[1].modelParamInfo[2]],
-                        //         rotation: [list4[2].modelParamInfo[0], list4[2].modelParamInfo[1], list4[2].modelParamInfo[2]],
-                        //       })
-                        //       wx.nextTick(()=>{
-                        //         gltf.setData({
-                        //           visible:true
-                        //         })
-                        //       })
-                        //     }
-                        //   })
-                        // }
-
-                    } else {
-                        console.log(video)
-                        video?.stop()
-                        // this.closeVideo()
                     }
                 }
 
-
             })
-
-
-        },
-
+        }
     }
+
 })

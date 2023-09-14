@@ -1,16 +1,50 @@
-<!--index.wxml-->
-<xr-canvas disable-scroll id="main-frame" width="{{renderWidth}}" height="{{renderHeight}}" style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;" bind:process="myProcess" bind:loaded="myLoaded" bind:clickChange="clickChange" class="xr"></xr-canvas>
-<view wx:if="{{loaded}}" class="progress-box">
+<view style="overflow:hidden">
+    <!--index.wxml-->
+    <navigate-back url="index"></navigate-back>
+
+    <xr-canvas wx:if="{{flag}}" disable-scroll id="main-frame" width="{{renderWidth}}" height="{{renderHeight}}" style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;" bind:process="myProcess" bind:loaded="myLoaded" bind:clickChange="clickChange" class="xr"></xr-canvas>
+    <!-- <view wx:if="{{loaded}}" class="progress-box">
     <view class="loadText">
         ar红包...</view>
 
     <progress percent="{{percent}}" color="#10AEFF" active stroke-width="3" />
-</view>
-<view  wx:if="{{clickFlag}}" class="red">
-    <image src="/images/red.png" mode="" />
-    <text class="red_text">
-        <text class="text_1">{{index}}</text>
-        <text class="text_2">恭喜获得{{index}}号红包！</text>
+</view> -->
+    <view class="myRed" wx:if="{{loaded}}" bind:tap="GoRedList">我的红包</view>
+    <my-red-list redListFlag="{{redListFlag}}" wx:if="{{redListFlag}}" bind:updateRedListFlag="updateRedListFlag"></my-red-list>
+    <view wx:if="{{clickFlag}}" class="red" style="display: block;transform-style: preserve-3d;">
+        <image src="/images/red.png" mode="scaleToFill" />
+        <text class="red_text">
+            <text bind:tap="fetchRed" class="text_1">{{index}}</text>
+            <text class="text_2">恭喜获得{{index}}号红包！</text>
 
-    </text>
+        </text>
+    </view>
+    <view wx:if="{{redpngFlag}}" class="red2">
+        <image src="/images/red2.png" mode="heightFix" />
+    </view>
+    <view class="redMain" wx:if="{{redMainFlag}}">
+        <view class="redTextMain">
+            <view class="{{isIPhoneX ? 'navigateback-x' :'navigateback'}}">
+                <text>{{title3}}</text>
+            </view>
+            <view bindtap="back" class="{{isIPhoneX ? 'backbtn-x' :'backbtn'}}">
+                <image class="back" src="/images/backBtn.png"></image>
+            </view>
+
+            <view style="font-size: 32rpx;color: #000000;margin-top:200rpx;font-family: PingFang SC;">恭喜获得 <text class="redText">{{index}}号</text> 红包</view>
+            <view style="margin-top:77rpx;font-size: 48rpx;line-height: 48rpx;font-weight: bold;">{{rewardList[index].name}}</view>
+            <view style="margin-top: 66rpx;" class="redText">¥{{rewardList[index].discountAmount}}</view>
+            <view style="margin-top: 6rpx;display:flex;align-items: center;justify-content: space-between;">
+                <view style="font-size: 24rpx;color: #F24627;">满{{rewardList[index].minPurchaseAmount}}可用</view>
+                <view class="smallText">到期日：{{rewardList[index].expiryDate}}</view>
+            </view>
+            <view style="width: 670rpx;border: 1px solid #DCDCDC;margin-top: 30rpx;"></view>
+            <view class="smallText" style="margin-top: 30rpx;font-size: 26rpx;">
+                <view>红包使用规则:</view>
+                <view>{{rewardList[index].rules}}</view>
+
+            </view>
+        </view>
+        <image style="width:100vw;position: fixed;bottom: 0;" src="/images/bottomRed.png" mode="aspectFill" />
+    </view>
 </view>

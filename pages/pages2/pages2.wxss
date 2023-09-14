@@ -477,7 +477,8 @@
     box-sizing: border-box;
     padding: 64rpx 90rpx 29rpx;
     background-size: 100% 100%;
-    background-image: url("https://arp3.arsnowslide.com/undefined/386606254508167168/undefined/bgc.png");
+    background-image: url("https://arp3.arsnowslide.com/undefined/386606254508167168/undefined/bgc2.png");
+    
 }
 
 .card-main .img1 {

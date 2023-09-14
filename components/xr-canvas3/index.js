@@ -3,6 +3,9 @@ let r
 let r2
 let x
 let z
+import {
+    throttle
+} from "../../utils/util";
 Component({
     behaviors: [require('../common/share-behavior').default],
     properties: {
@@ -45,9 +48,7 @@ Component({
             console.log(list)
         },
         detached() {
-            this.data.list.forEach((c, v) => {
-                this.scene.assets.releaseAsset('gltf', `${v}`);
-            })
+            this.scene.assets.releaseAsset('gltf', 'gltfitem');
         }
     },
 
@@ -147,6 +148,11 @@ Component({
         }) {
             console.log('assets loaded', detail.value);
             this.triggerEvent('loaded', true)
+            wx.showToast({
+                title: '寻找周围的红包吧!',
+                icon: 'success',
+                duration: 2000
+            })
         },
         async change(i) {
             // console.log('change')
@@ -169,16 +175,22 @@ Component({
 
 
         },
-       async logFunction({target}) {
+        logFunction: throttle(async function ({
+            target
+        }) {
             // console.log('touch', target.id)
             // wx.showToast({
             //   title: `恭喜你抽中红包${target.id}号`,
             // })
-            await this.triggerEvent('clickChange',{flag:true,index:target.id})
+            console.log('logFunction')
+            await this.triggerEvent('clickChange', {
+                flag: true,
+                index: target.id
+            })
             this.xrGltf = this.scene.getElementById('xrGltf')
             this.xrGltf.removeChild(this.scene.getElementById(`${target.id}`))
-            
-        },
+
+        }, null),
         // async change() {
         //     wx.startDeviceMotionListening({
         //         success: () => {
@@ -247,7 +259,7 @@ Component({
 
         // },
         getPosition() {
-            const randomNumber = (Math.random() * 20 - 10).toFixed(10);
+            const randomNumber = (Math.random() * 20 - 10).toFixed(7);
             return randomNumber
         },
         getRotation() {
@@ -293,18 +305,18 @@ Component({
             const xrFrameSystem = this.xrFrameSystem = wx.getXrFrameSystem()
 
             const scene = this.scene = detail.value;
-            this.camera = this.scene.getElementById("camera");
-            this.anchor = this.scene.getNodeById('anchor');
-            this.gltfModel = await scene.assets.loadAsset({
-                type: 'gltf',
-                assetId: 'gltf',
-                src: 'https://arp3.arsnowslide.com/undefined/385971493892739072/undefined/dengta.glb',
-                options: {
-                    "ignoreError": '-1'
-                }
-            })
+            // this.camera = this.scene.getElementById("camera");
+            // this.anchor = this.scene.getNodeById('anchor');
+            // this.gltfModel = await scene.assets.loadAsset({
+            //     type: 'gltf',
+            //     assetId: 'gltf',
+            //     src: 'https://arp3.arsnowslide.com/undefined/385971493892739072/undefined/dengta.glb',
+            //     options: {
+            //         "ignoreError": '-1'
+            //     }
+            // })
 
-            this.triggerEvent('loaded', true)
+            // this.triggerEvent('loaded', true)
         },
         handleTrackerSwitch(e) {
             // const xrFrameSystem = wx.getXrFrameSystem()

@@ -51,7 +51,7 @@ Page({
         imageLight2: false,
         indexList: [],
         imageList: ['/images/c/c11.png', '/images/c/c22.png', '/images/c/c33.png', '/images/c/c44.png', '/images/c/c55.png', '/images/c/c66.png'],
-        imageList2: ['https://arp3.arsnowslide.com/undefined/386606254508167168/undefined/1686276424809.png', 'https://arp3.arsnowslide.com/undefined/386606254508167168/undefined/c2.png', 'https://arp3.arsnowslide.com/undefined/386606254508167168/undefined/c3.png', 'https://arp3.arsnowslide.com/undefined/386606254508167168/undefined/c4.png', 'https://arp3.arsnowslide.com/undefined/386606254508167168/undefined/c5.png', 'https://arp3.arsnowslide.com/undefined/386606254508167168/undefined/c6.png']
+        imageList2: ['https://arp3.arsnowslide.com/undefined/386606254508167168/undefined/1686276424809.png', 'https://arp3.arsnowslide.com/undefined/386606254508167168/undefined/c2.png', 'https://arp3.arsnowslide.com/undefined/386606254508167168/undefined/c333.png', 'https://arp3.arsnowslide.com/undefined/386606254508167168/undefined/c4.png', 'https://arp3.arsnowslide.com/undefined/386606254508167168/undefined/c5.png', 'https://arp3.arsnowslide.com/undefined/386606254508167168/undefined/c6.png']
 
 
 
@@ -88,31 +88,37 @@ Page({
             wx.offThemeChange();
         }
         wx.removeStorageSync("projectCode");
+        this.setData({flag:false})
+
     },
     async onLoad({
         param
     }) {
 
-        // await wx.login({
-        //     success: async (res) => {
-        //         console.log(res)
+        await wx.login({
+            success: async (res) => {
+                console.log(res)
 
-        //         if (res.code) {
-        //             const {
-        //                 openid
-        //             } = await API.login(`code=${res.code}`)
-        //             this.openid = openid
-        //             const res4 = await API.addPiece(`miniOpenId=${this.openid}&pieceCode=1`)
-        //             console.log(openid)
-        //             const res3 = await API.getPieceList(`miniOpenId=${openid}`)
-        //             if (res3.length !== 0) {
-        //                 res3.forEach(v => {
-        //                     this.data.imageList[v] = this.data.imageList2[v]
-        //                 })
-        //             }
-        //         } else {}
-        //     },
-        // });
+                if (res.code) {
+                    const {
+                        openid
+                    } = await API.login(`code=${res.code}`)
+                    this.openid = openid
+                    // const res4 = await API.addPiece(`miniOpenId=${this.openid}&pieceCode=2`)
+                    // console.log(res4)
+                    const res3 = await API.getPieceList(`miniOpenId=${openid}`)
+                    console.log(res3)
+                    if (res3.length !== 0) {
+                        res3.forEach(v => {
+                            this.data.imageList[v.pieceCode] = this.data.imageList2[v.pieceCode]
+                            this.data.indexList.push(parseInt(v.pieceCode))
+                        })
+                        console.log(this.data.imageList)
+                        this.setData({imageList:this.data.imageList})
+                    }
+                } else {}
+            },
+        });
 
         this.child = this.selectComponent('.xr');
         // let projectCode = wx.getStorageSync("projectCode");
@@ -124,7 +130,7 @@ Page({
             mediaList = [],
             paramList = []
         let data = {
-            projectCode: '386259646008479744'
+            projectCode: '421762811440877568'
         };
         let dataList = await API.selMediaApps(data);
         dataList.mediaList.forEach((value) => {
@@ -179,7 +185,6 @@ Page({
                     break;
             }
         }
-        console.log(gltfResList, videoResList, imageResList)
         this.setData({
             width,
             height,
@@ -192,7 +197,7 @@ Page({
             videoResList,
             imageResList,
             flag: true,
-            imageList: this.data.imageList2
+            // imageList:this.data.imageList
 
         });
         console.log(obsList, mediaList, paramList, gltfResList, videoResList, imageResList)
@@ -240,6 +245,11 @@ Page({
     changeShow({
         detail
     }) {
+        wx.showToast({
+            title: '请对准图像拾取碎片',
+            icon: 'success',
+            duration: 2000
+          })
         this.setData({
             isShowScan: detail.isShowScan
         })
@@ -266,211 +276,6 @@ Page({
         this.initGL();
     },
     changeImage() {
-
-
-        // this.animate(`#img1`, [{
-        //         ease: 'ease',
-        //         translateX: 0,
-        //         translateY: 0,
-        //         opacity: 1,
-        //         duration: duration1,
-        //         rotateY: 0,
-        //     },
-        //     {
-        //         ease: 'ease',
-        //         translateX: 0,
-        //         opacity: 1,
-        //         translateY: 0,
-        //         duration: duration2,
-        //         rotateY: 0,
-
-        //     },
-        //     {
-        //         ease: 'ease',
-        //         translateX: 12,
-        //         translateY: 7,
-        //         opacity: 1,
-        //         duration: duration3,
-        //         rotateY: 720,
-        //     },
-
-        // ], duration3)
-        // this.animate(`#img2`, [{
-        //         ease: 'ease',
-        //         translateX: 0,
-        //         translateY: 0,
-        //         duration: duration1,
-        //         opacity: 1,
-        //         rotateY: 0,
-
-
-        //     },
-        //     {
-        //         ease: 'ease',
-        //         translateX: 0,
-        //         opacity: 1,
-        //         translateY: 0,
-        //         duration: duration2,
-        //         rotateY: 0,
-
-        //     },
-        //     {
-        //         ease: 'ease',
-        //         translateX: 0,
-        //         translateY: 7,
-        //         rotateY: 720,
-        //         opacity: 1,
-        //         duration: duration3
-        //     },
-
-        // ], duration3)
-        // this.animate('#img5', [{
-        //         ease: 'ease',
-        //         translateX: 0,
-        //         translateY: 0,
-        //         duration: duration1,
-        //         opacity: 1,
-        //         rotateY: 0,
-
-
-        //     },
-        //     {
-        //         ease: 'ease',
-        //         translateX: 0,
-        //         opacity: 1,
-        //         translateY: 0,
-        //         duration: duration2,
-        //         rotateY: 0,
-
-        //     },
-        //     {
-        //         ease: 'ease',
-        //         translateX: 0,
-        //         translateY: -3,
-        //         rotateY: 720,
-        //         opacity: 1,
-        //         duration: duration3
-        //     },
-        // ], duration3)
-        // this.animate(`#img3`, [{
-        //         ease: 'ease',
-        //         translateX: 0,
-        //         translateY: 0,
-        //         duration: duration1,
-        //         opacity: 1,
-        //         rotateY: 0,
-        //     },
-        //     {
-        //         ease: 'ease',
-        //         translateX: 0,
-        //         opacity: 1,
-        //         translateY: 0,
-        //         duration: duration2,
-        //         rotateY: 0,
-        //     },
-        //     {
-        //         ease: 'ease',
-        //         translateX: -14,
-        //         translateY: 7,
-        //         opacity: 1,
-        //         duration: duration3,
-        //         rotateY: 720,
-        //     },
-
-        // ], duration3)
-        // this.animate(`#img4`, [{
-        //         ease: 'ease',
-        //         translateX: 0,
-        //         translateY: 0,
-        //         duration: duration1,
-        //         rotateY: 0,
-        //         opacity: 1,
-
-        //     },
-        //     {
-        //         ease: 'ease',
-        //         translateX: 0,
-        //         opacity: 1,
-        //         translateY: 0,
-        //         duration: duration2,
-        //         rotateY: 0,
-
-        //     },
-        //     {
-        //         ease: 'ease',
-        //         translateX: 10,
-        //         translateY: -3,
-        //         rotateY: 720,
-        //         opacity: 1,
-        //         duration: duration3
-
-        //     },
-
-        // ], duration3)
-
-        // this.animate(`#img6`, [{
-        //         ease: 'ease',
-        //         translateX: 0,
-        //         translateY: 0,
-        //         rotateY: 0,
-        //         duration: duration1,
-        //         opacity: 1,
-        //     },
-        //     {
-        //         ease: 'ease',
-        //         translateX: 0,
-        //         opacity: 1,
-        //         translateY: 0,
-        //         rotateY: 0,
-        //         duration: duration2,
-        //     },
-        //     {
-        //         ease: 'ease',
-        //         translateX: -12,
-        //         translateY: -3,
-        //         opacity: 1,
-        //         rotateY: 720,
-        //         duration: duration3
-        //     },
-
-        // ], duration3, () => {
-        //     console.log('this.indexflag')
-
-        //     this.setData({
-        //         successFlag: true,
-        //         isShow2: false,
-        //         indexFlag: false,
-        //     })
-        //     if (this.data.successFlag) {
-        //         this.animate(('#card-main3'), [{
-        //                 ease: 'ease',
-        //                 opacity: 0.9,
-        //                 duration: 100
-        //             },
-        //             {
-        //                 ease: 'ease',
-        //                 opacity: 1,
-        //                 duration: 6000
-        //             },
-        //             {
-        //                 ease: 'ease',
-        //                 opacity: 0,
-        //                 duration: 2000
-        //             }
-        //         ], 8100, () => {
-        //             console.log('123')
-        //             this.setData({
-        //                 isShow2: false,
-        //                 successFlag: false,
-        //                 indexFlag: false
-        //             })
-
-        //         })
-
-        //     }
-
-
-        // })
         console.log('this.indexflagindexflagindexflag')
         this.setData({
             imageLight: true
@@ -480,75 +285,21 @@ Page({
                 imageLight2: true,
                 successFlag: true,
                 isShow2: false,
-                indexFlag: false,
+                // indexFlag: false,
             })
+            setTimeout(() => {
+                this.setData({
+                    successFlag: false,
+                    imageLight2: false,
+                    imageLight: false
+                })
+            }, 2500);
         },2000);
-        setTimeout(() => {
-            this.setData({
-                successFlag: false,
-                imageLight2: false,
-                imageLight: false
-            })
-        }, 6500);
+
         let duration1 = 100
         let duration2 = 1500
         let duration3 = 2500
-        // this.animate(`#banner2`, [{
-        //         ease: 'ease-out',
-        //         rotateY: 0,
-        //         duration: duration1,
-        //         opacity: 0.5,
-        //         scale: [1,1,1],
-        //         translateZ: 1
-        //     },
-        //     {
-        //         ease: 'ease-out',
-        //         opacity: 1,
-        //         rotateY: 180,
-        //         scale: [1.3,1.3,1.3],
-
-        //         duration: duration2,
-        //     },
-        //     {
-        //         ease: 'ease-out',
-        //         opacity: 1,
-        //         rotateY: 360,
-        //         scale: [1,1,1],
-        //         duration: duration3,
-        //     },
-
-        // ], 4000, () => {
-        //     console.log('this.indexflag')
-
-        //     // if (this.data.successFlag) {
-        //     //     this.animate(('#card-main3'), [{
-        //     //             ease: 'ease',
-        //     //             opacity: 0.9,
-        //     //             duration: 100
-        //     //         },
-        //     //         {
-        //     //             ease: 'ease',
-        //     //             opacity: 1,
-        //     //             duration: 6000
-        //     //         },
-        //     //         {
-        //     //             ease: 'ease',
-        //     //             opacity: 0,
-        //     //             duration: 2000
-        //     //         }
-        //     //     ], 8100, () => {
-        //     //         console.log('123')
-        //     //         this.setData({
-        //     //             isShow2: false,
-        //     //             successFlag: false,
-        //     //             indexFlag: false
-        //     //         })
-
-        //     //     })
-
-        //     // }
-        // })
-
+        
     },
     async getIndex({
         detail
@@ -558,17 +309,14 @@ Page({
         this.setData({
             imageList: this.data.imageList
         })
-        //    const res= await API.addPiece({
-        //         miniOpenId: this.openid,
-        //         pieceCode: index
-        //     })
-
+           const res= await API.addPiece(`miniOpenId=${this.openid}&pieceCode=${index}`)
+            console.log(res)
         if (this.data.indexList.indexOf(index) === -1) {
             this.data.indexList.push(index)
         }
         console.log(this.data.indexList)
-        // if (this.data.indexList.length === 6) {
-        if (this.data.indexList.length !== 6) {
+        if (this.data.indexList.length === 6) {
+        // if (this.data.indexList.length !== 6) {
             this.setData({
                 isShow2: true,
                 indexFlag: true,
@@ -610,7 +358,7 @@ Page({
                     console.log('123')
                     this.setData({
                         isShow2: false,
-                        successFlag: false,
+                        // successFlag: false,
                         indexFlag: false
                     })
 

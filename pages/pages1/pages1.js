@@ -14,8 +14,8 @@ Page({
         isShowScan: false,
         theme: "light",
         imgUrl: "",
-        percentLine: 50,
         projectCode: "",
+        percent:0,
         width: 300,
         height: 300,
         renderWidth: 300,
@@ -77,6 +77,7 @@ Page({
                 wx.offThemeChange();
             }
             wx.removeStorageSync("projectCode");
+            this.setData({flag:false})
         },
         async onLoad({param}) {
             this.child = this.selectComponent('.xr');
@@ -144,7 +145,7 @@ Page({
                         break;
                 }
             }
-            console.log(gltfResList, videoResList, imageResList)
+            console.log(gltfResList, videoResList, imageResList,mediaList,'111')
             this.setData({
                 width,
                 height,
@@ -203,6 +204,17 @@ Page({
         }) {
             this.setData({
                 isShowScan: detail.isShowScan
+            })
+            wx.showToast({
+                title: '请对准图像进行ar识别',
+                icon: 'success',
+                duration: 2000
+              })
+        },
+        changePercent({detail}){
+            console.log(detail)
+            this.setData({
+                percent:detail.percent
             })
         },
         // touchMove({ touches }) {

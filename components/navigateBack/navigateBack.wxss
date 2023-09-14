@@ -4,7 +4,7 @@
     position: fixed;
     top: 60rpx;
     left: 0;
-    z-index: 99999;
+    z-index: 99;
     font-size: 34rpx;
     font-family: PingFang SC;
     font-weight: 500;
@@ -18,7 +18,7 @@
     position: fixed;
     top: 100rpx;
     left: 0;
-    z-index: 99999;
+    z-index: 99;
     font-size: 34rpx;
     font-family: PingFang SC;
     font-weight: 500;
@@ -31,7 +31,7 @@
     width: 44rpx;
     height: 42rpx;
     left: 20rpx;
-    z-index: 99999;
+    z-index: 99;
   }
   .backbtn-x {
     position: fixed;
@@ -39,7 +39,7 @@
     left: 20rpx;
     width: 44rpx;
     height: 42rpx;
-    z-index: 99999;
+    z-index: 99;
   }
   .back {
     margin-left: 10rpx;

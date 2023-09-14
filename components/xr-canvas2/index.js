@@ -49,6 +49,127 @@ Component({
         mediaList(newVal) {
             this.setData({
                 mediaList1: newVal
+                // mediaList1: [{
+                //     "id": 4533,
+                //     "userCode": null,
+                //     "projectCode": "421762811440877568",
+                //     "appType": null,
+                //     "classCode": "421762819443609601",
+                //     "mediaCode": "421762819443609602",
+                //     "mediaType": 3,
+                //     "isInteraction": false,
+                //     "mediaObsName": "c11.png",
+                //     "mediaObsPath": "undefined/421762811440877568/undefined/",
+                //     "mediaUrl": "//arp3.arsnowslide.com/undefined/421762811440877568/undefined/c11.png",
+                //     "parentCode": "421762819443609600",
+                //     "createTime": null,
+                //     "modifyTime": null,
+                //     "status": "0",
+                //     "delFlag": "0",
+                //     "createrCode": null,
+                //     "fsetName": null,
+                //     "fsetObsPath": null
+                // }, {
+                //     "id": 4535,
+                //     "userCode": null,
+                //     "projectCode": "421762811440877568",
+                //     "appType": null,
+                //     "classCode": "421762879262773249",
+                //     "mediaCode": "421762879262773250",
+                //     "mediaType": 3,
+                //     "isInteraction": false,
+                //     "mediaObsName": "c22.png",
+                //     "mediaObsPath": "undefined/421762811440877568/undefined/",
+                //     "mediaUrl": "//arp3.arsnowslide.com/undefined/421762811440877568/undefined/c22.png",
+                //     "parentCode": "421762879262773248",
+                //     "createTime": null,
+                //     "modifyTime": null,
+                //     "status": "0",
+                //     "delFlag": "0",
+                //     "createrCode": null,
+                //     "fsetName": null,
+                //     "fsetObsPath": null
+                // }, {
+                //     "id": 4537,
+                //     "userCode": null,
+                //     "projectCode": "421762811440877568",
+                //     "appType": null,
+                //     "classCode": "421762926293504001",
+                //     "mediaCode": "421762926293504002",
+                //     "mediaType": 3,
+                //     "isInteraction": false,
+                //     "mediaObsName": "c333.png",
+                //     "mediaObsPath": "undefined/421762811440877568/undefined/",
+                //     "mediaUrl": "//arp3.arsnowslide.com/undefined/421762811440877568/undefined/c333.png",
+                //     "parentCode": "421762926293504000",
+                //     "createTime": null,
+                //     "modifyTime": null,
+                //     "status": "0",
+                //     "delFlag": "0",
+                //     "createrCode": null,
+                //     "fsetName": null,
+                //     "fsetObsPath": null
+                // }, {
+                //     "id": 4539,
+                //     "userCode": null,
+                //     "projectCode": "421762811440877568",
+                //     "appType": null,
+                //     "classCode": "421762985923923969",
+                //     "mediaCode": "421762985923923970",
+                //     "mediaType": 3,
+                //     "isInteraction": false,
+                //     "mediaObsName": "c44.png",
+                //     "mediaObsPath": "undefined/421762811440877568/undefined/",
+                //     "mediaUrl": "//arp3.arsnowslide.com/undefined/421762811440877568/undefined/c44.png",
+                //     "parentCode": "421762985923923968",
+                //     "createTime": null,
+                //     "modifyTime": null,
+                //     "status": "0",
+                //     "delFlag": "0",
+                //     "createrCode": null,
+                //     "fsetName": null,
+                //     "fsetObsPath": null
+                // }, {
+                //     "id": 4541,
+                //     "userCode": null,
+                //     "projectCode": "421762811440877568",
+                //     "appType": null,
+                //     "classCode": "421763022699581441",
+                //     "mediaCode": "421763022699581442",
+                //     "mediaType": 3,
+                //     "isInteraction": false,
+                //     "mediaObsName": "c55.png",
+                //     "mediaObsPath": "undefined/421762811440877568/undefined/",
+                //     "mediaUrl": "//arp3.arsnowslide.com/undefined/421762811440877568/undefined/c55.png",
+                //     "parentCode": "421763022699581440",
+                //     "createTime": null,
+                //     "modifyTime": null,
+                //     "status": "0",
+                //     "delFlag": "0",
+                //     "createrCode": null,
+                //     "fsetName": null,
+                //     "fsetObsPath": null
+                // }, {
+                //     "id": 4543,
+                //     "userCode": null,
+                //     "projectCode": "421762811440877568",
+                //     "appType": null,
+                //     "classCode": "421763057797517313",
+                //     "mediaCode": "421763057797517314",
+                //     "mediaType": 3,
+                //     "isInteraction": false,
+                //     "mediaObsName": "c66.png",
+                //     "mediaObsPath": "undefined/421762811440877568/undefined/",
+                //     "mediaUrl": "//arp3.arsnowslide.com/undefined/421762811440877568/undefined/c66.png",
+                //     "parentCode": "421763057797517312",
+                //     "createTime": null,
+                //     "modifyTime": null,
+                //     "status": "0",
+                //     "delFlag": "0",
+                //     "createrCode": null,
+                //     "fsetName": null,
+                //     "fsetObsPath": null
+                // }]
             })
         },
         paramList(newVal) {
@@ -69,6 +190,128 @@ Component({
         imageResList(newVal) {
             this.setData({
                 imageResList1: newVal
+
+                // imageResList1:  [{
+                //     "id": 4533,
+                //     "userCode": null,
+                //     "projectCode": "421762811440877568",
+                //     "appType": null,
+                //     "classCode": "421762819443609601",
+                //     "mediaCode": "421762819443609602",
+                //     "mediaType": 3,
+                //     "isInteraction": false,
+                //     "mediaObsName": "c11.png",
+                //     "mediaObsPath": "undefined/421762811440877568/undefined/",
+                //     "mediaUrl": "//arp3.arsnowslide.com/undefined/421762811440877568/undefined/c11.png",
+                //     "parentCode": "421762819443609600",
+                //     "createTime": null,
+                //     "modifyTime": null,
+                //     "status": "0",
+                //     "delFlag": "0",
+                //     "createrCode": null,
+                //     "fsetName": null,
+                //     "fsetObsPath": null
+                // }, {
+                //     "id": 4535,
+                //     "userCode": null,
+                //     "projectCode": "421762811440877568",
+                //     "appType": null,
+                //     "classCode": "421762879262773249",
+                //     "mediaCode": "421762879262773250",
+                //     "mediaType": 3,
+                //     "isInteraction": false,
+                //     "mediaObsName": "c22.png",
+                //     "mediaObsPath": "undefined/421762811440877568/undefined/",
+                //     "mediaUrl": "//arp3.arsnowslide.com/undefined/421762811440877568/undefined/c22.png",
+                //     "parentCode": "421762879262773248",
+                //     "createTime": null,
+                //     "modifyTime": null,
+                //     "status": "0",
+                //     "delFlag": "0",
+                //     "createrCode": null,
+                //     "fsetName": null,
+                //     "fsetObsPath": null
+                // }, {
+                //     "id": 4537,
+                //     "userCode": null,
+                //     "projectCode": "421762811440877568",
+                //     "appType": null,
+                //     "classCode": "421762926293504001",
+                //     "mediaCode": "421762926293504002",
+                //     "mediaType": 3,
+                //     "isInteraction": false,
+                //     "mediaObsName": "c333.png",
+                //     "mediaObsPath": "undefined/421762811440877568/undefined/",
+                //     "mediaUrl": "//arp3.arsnowslide.com/undefined/421762811440877568/undefined/c333.png",
+                //     "parentCode": "421762926293504000",
+                //     "createTime": null,
+                //     "modifyTime": null,
+                //     "status": "0",
+                //     "delFlag": "0",
+                //     "createrCode": null,
+                //     "fsetName": null,
+                //     "fsetObsPath": null
+                // }, {
+                //     "id": 4539,
+                //     "userCode": null,
+                //     "projectCode": "421762811440877568",
+                //     "appType": null,
+                //     "classCode": "421762985923923969",
+                //     "mediaCode": "421762985923923970",
+                //     "mediaType": 3,
+                //     "isInteraction": false,
+                //     "mediaObsName": "c44.png",
+                //     "mediaObsPath": "undefined/421762811440877568/undefined/",
+                //     "mediaUrl": "//arp3.arsnowslide.com/undefined/421762811440877568/undefined/c44.png",
+                //     "parentCode": "421762985923923968",
+                //     "createTime": null,
+                //     "modifyTime": null,
+                //     "status": "0",
+                //     "delFlag": "0",
+                //     "createrCode": null,
+                //     "fsetName": null,
+                //     "fsetObsPath": null
+                // }, {
+                //     "id": 4541,
+                //     "userCode": null,
+                //     "projectCode": "421762811440877568",
+                //     "appType": null,
+                //     "classCode": "421763022699581441",
+                //     "mediaCode": "421763022699581442",
+                //     "mediaType": 3,
+                //     "isInteraction": false,
+                //     "mediaObsName": "c55.png",
+                //     "mediaObsPath": "undefined/421762811440877568/undefined/",
+                //     "mediaUrl": "//arp3.arsnowslide.com/undefined/421762811440877568/undefined/c55.png",
+                //     "parentCode": "421763022699581440",
+                //     "createTime": null,
+                //     "modifyTime": null,
+                //     "status": "0",
+                //     "delFlag": "0",
+                //     "createrCode": null,
+                //     "fsetName": null,
+                //     "fsetObsPath": null
+                // }, {
+                //     "id": 4543,
+                //     "userCode": null,
+                //     "projectCode": "421762811440877568",
+                //     "appType": null,
+                //     "classCode": "421763057797517313",
+                //     "mediaCode": "421763057797517314",
+                //     "mediaType": 3,
+                //     "isInteraction": false,
+                //     "mediaObsName": "c66.png",
+                //     "mediaObsPath": "undefined/421762811440877568/undefined/",
+                //     "mediaUrl": "//arp3.arsnowslide.com/undefined/421762811440877568/undefined/c66.png",
+                //     "parentCode": "421763057797517312",
+                //     "createTime": null,
+                //     "modifyTime": null,
+                //     "status": "0",
+                //     "delFlag": "0",
+                //     "createrCode": null,
+                //     "fsetName": null,
+                //     "fsetObsPath": null
+                // }]
             })
         },
     },
@@ -103,7 +346,7 @@ Component({
             this.innerAudioContext?.destroy()
             clearInterval(this.innerInterval);
             this.data.mediaList1.forEach((c, v) => {
-                this.scene.assets.releaseAsset('gltf', `gltf-${v}`);
+                this.scene.assets.releaseAsset('gltf', `image-${v}`);
             })
             this.scene.assets.releaseAsset('gltf', `gltfModel`);
             //   this.closeVideo()
@@ -144,7 +387,9 @@ Component({
 
         logFunction(e) {
             console.log('log', this.index)
-            this.triggerEvent('getIndex',{index:this.index})
+            this.triggerEvent('getIndex', {
+                index: this.index
+            })
         },
         releaseImage() {
             if (this.data.imageIdList && this.data.imageIdList.length > 0) {
@@ -419,6 +664,8 @@ Component({
                             u_baseColorMap: videoTexture.value
                         }
                     )
+                    videoMat.renderQueue = 2500;
+                    videoMat.alphaMode = "BLEND";
                     scene.assets.addAsset('material', `image-mat-${imageList[index].id}`, videoMat)
                 })
                 console.log('image asset loaded')
@@ -494,22 +741,22 @@ Component({
                 if (element === markerTracker) {
                     console.log(markerInfo.mediaCode)
                     switch (markerInfo.mediaCode) {
-                        case "388478902376812544":
+                        case "421762819443609600":
                             this.index = 0
                             break;
-                        case "388479151526858752":
+                        case "421762879262773248":
                             this.index = 1
                             break;
-                        case "388479373493620736":
+                        case "421762926293504000":
                             this.index = 2
                             break;
-                        case "388479414513913856":
+                        case "421762985923923968":
                             this.index = 3
                             break;
-                        case "388479451562201088":
+                        case "421763022699581440":
                             this.index = 4
                             break;
-                        case "388479486043574272":
+                        case "421763057797517312":
                             this.index = 5
                             break;
                         default:

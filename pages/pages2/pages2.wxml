@@ -15,7 +15,7 @@
                 <image id="img6" class="img6" src=" {{imageList[5]}}" mode="aspectFill" />
             </view>
             <view class="card-main2" id="card-main3" wx:if="{{successFlag}}">
-                <image id="banner2" class="banner2  {{imageLight2? 'imageLight2':''}}" src="/images/banner2.png" mode="aspectFill" />
+                <image id="banner2" class="banner2  {{imageLight2? 'imageLight2':''}}" src="/images/banner3.jpg" mode="aspectFill" />
             </view>
         </view>
         <view class="{{isIPhoneX ? 'container2-x' :'container2'}}" wx:if="{{!isShowScan}}">

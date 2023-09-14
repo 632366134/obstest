@@ -1,8 +1,7 @@
 {
     "usingComponents": {
         "xr-canvas":"/components/xr-canvas/index",
-        "navigate-back":"/components/navigateBack/navigateBack",
-        "marker-ar":"/components/2dmarker-ar/2dmarker-ar"
+        "navigate-back":"/components/navigateBack/navigateBack"
     },
     "navigationStyle": "custom",
     "disableScroll": true
